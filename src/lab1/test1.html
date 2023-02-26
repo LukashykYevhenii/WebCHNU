@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Change Circle Size with Range Input in Canvas</title>
+</head>
+<body>
+<input type="range" id="circleSizeInput" min="10" max="100" value="50">
+<canvas id="myCanvas"></canvas>
+
+<script>
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+  const circleSizeInput = document.getElementById("circleSizeInput");
+
+  // Set the initial circle size
+  let circleSize = circleSizeInput.value;
+
+  // Add an event listener to the input element
+  circleSizeInput.addEventListener("input", function() {
+    circleSize = circleSizeInput.value;
+    redrawCircle();
+  });
+
+  // Function to redraw the circle
+  function redrawCircle() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height/2, circleSize/2, 0, 2*Math.PI);
+    ctx.stroke();
+  }
+
+  // Draw the initial circle
+  redrawCircle();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<input type="range" id="lineWidthInput" min="1" max="10" value="5">
+<canvas id="myCanvas"></canvas>
+
+<script>
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+  const lineWidthInput = document.getElementById("lineWidthInput");
+
+  // Set the initial line width
+  draw()
+  ctx.lineWidth = lineWidthInput.value;
+
+
+  // Add an event listener to the input element
+  lineWidthInput.addEventListener("input", function () {
+    ctx.lineWidth = lineWidthInput.value;
+    draw()
+  });
+
+  // Draw a line
+  function draw() {
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(100, 100);
+    ctx.stroke();
+  }
+
+</script>
+
+</body>
+</html>

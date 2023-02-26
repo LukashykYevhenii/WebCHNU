@@ -1,0 +1,197 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<canvas id="myCanvas" width="1000" height="1000" style="border:1px solid red; display:block; margin:auto;">-->
+<!--</canvas>-->
+
+<!--<script>-->
+<!--    var c = document.getElementById("myCanvas");-->
+<!--    var ctx = c.getContext("2d");-->
+<!--    ctx.beginPath();-->
+<!--    ctx.arc(400, 400, 50, 0, 2 * Math.PI);-->
+<!--    ctx.arc()-->
+
+
+<!--    ctx.stroke();-->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Canvas</title>
+</head>
+<body>
+
+<div class="slidecontainer">
+  <p>Размер точек:<span id="fill"></span></p>
+  <input type="range" min="5" max="20" value="1" id="fillSize">
+
+  <p>Размер линий: <span id="stroke"></span></p>
+  <input type="range" min="5" max="20" value="1" id="strokeSize">
+
+  <p>Цвет линий: <span id="stroke-color"></span></p>
+  <input type="color" value="#ff0000" id="strokeColor">
+
+  <p>Цвет точек: <span id="fill-color"></span></p>
+  <input type="color"  value="1" id="fillColor">
+</div>
+
+
+<canvas id="imageView" width="1200" height="1200"></canvas>
+
+
+<script type="text/javascript">
+  const canvas = document.getElementById('imageView');
+  const context = canvas.getContext('2d');
+
+  const slider1 = document.getElementById("fillSize");
+  const slider2 = document.getElementById('strokeSize');
+  const colorbox1 = document.getElementById('strokeColor');
+  const colorbox2 = document.getElementById('fillColor');
+
+  const outFill = document.getElementById("fill");
+  const outStroke = document.getElementById("stroke");
+
+  outFill.innerHTML = slider1.value;
+  outStroke.innerHTML = slider2.value;
+
+  context.lineWidth = slider2.value;
+  let circleSize = slider1.value;
+
+
+
+  slider2.addEventListener("input", function () {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawShape()
+    context.lineWidth = slider2.value;
+    outStroke.innerHTML = this.value;
+  });
+
+  slider1.addEventListener("input", function () {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    circleSize = slider1.value;
+    outFill.innerHTML = this.value;
+    drawShape()
+  });
+
+  colorbox1.addEventListener("input", function (){
+
+
+  });
+
+
+  colorbox2.addEventListener("input", function (){
+
+
+  });
+
+  function drawShape() {
+
+    context.strokeStyle = '#000000';
+    context.save();
+    context.scale(1, 1);
+    context.beginPath();
+    context.arc(350, 470, 61, 0, 2 * Math.PI, false);
+    context.stroke();
+    context.closePath();
+    context.restore();
+
+    context.strokeStyle = '#000000';
+    context.beginPath();
+    context.moveTo(351, 407);
+    context.lineTo(241, 104);
+    context.stroke();
+    context.closePath();
+
+    context.strokeStyle = '#000000';
+    context.beginPath();
+    context.moveTo(241, 104);
+    context.lineTo(450, 104);
+    context.stroke();
+    context.closePath();
+
+    context.strokeStyle = '#000000';
+    context.beginPath();
+    context.moveTo(450, 104);
+    context.lineTo(351, 407);
+    context.stroke();
+    context.closePath();
+    context.strokeStyle = '#000000';
+    context.beginPath();
+    context.moveTo(241, 104);
+    context.lineTo(186, 292);
+    context.stroke();
+    context.closePath();
+
+    context.strokeStyle = '#000000';
+    context.beginPath();
+    context.moveTo(184, 292);
+    context.lineTo(511, 292);
+    context.stroke();
+    context.closePath();
+    context.strokeStyle = '#000000';
+    context.beginPath();
+    context.moveTo(511, 292);
+    context.lineTo(450, 104);
+    context.stroke();
+    context.closePath();
+
+    context.fillStyle = 'red';
+    context.save();
+    context.scale(1, 1);
+    context.beginPath();
+    context.arc(351, 407, circleSize, 0, 2 * Math.PI, false);
+    context.closePath();
+    context.fill()
+
+    context.fillStyle = 'red';
+    context.save();
+    context.scale(1, 1);
+    context.beginPath();
+    context.arc(241, 104, circleSize, 0, 2 * Math.PI, false);
+    context.closePath();
+    context.fill()
+
+    context.fillStyle = 'red';
+    context.save();
+    context.scale(1, 1);
+    context.beginPath();
+    context.arc(184, 292, circleSize, 0, 2 * Math.PI, false);
+    context.closePath();
+    context.fill()
+
+    context.fillStyle = 'red';
+    context.save();
+    context.scale(1, 1);
+    context.beginPath();
+    context.arc(511, 292, circleSize, 0, 2 * Math.PI, false);
+    context.closePath();
+    context.fill()
+
+    context.fillStyle = 'red';
+    context.save();
+    context.scale(1, 1);
+    context.beginPath();
+    context.arc(450, 104, circleSize, 0, 2 * Math.PI, false);
+    context.closePath();
+    context.fill()
+    context.closePath();
+    context.restore();
+  }
+
+  drawShape()
+</script>
+</body>
+</html>
