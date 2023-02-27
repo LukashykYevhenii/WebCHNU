@@ -1,56 +1,74 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<canvas id="myCanvas" width="1000" height="1000" style="border:1px solid red; display:block; margin:auto;">-->
-<!--</canvas>-->
-
-<!--<script>-->
-<!--    var c = document.getElementById("myCanvas");-->
-<!--    var ctx = c.getContext("2d");-->
-<!--    ctx.beginPath();-->
-<!--    ctx.arc(400, 400, 50, 0, 2 * Math.PI);-->
-<!--    ctx.arc()-->
-
-
-<!--    ctx.stroke();-->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>Your Canvas</title>
+  <style>
+    .slidecontainer {
+      float: left;
+      margin-left: 30px;
+    }
+
+    #imageView, img {
+      border: 2px solid black;
+      border-radius: 20px;
+    }
+
+    img {
+      margin-left: 20px;
+    }
+
+
+    .canvasimage {
+      margin: 20px;
+      text-align: center;
+    }
+
+    #container {
+      font-family: Cambria, serif;
+      font-weight: bold;
+      width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+    #fill, #stroke, #stroke-color, #fill-color {
+      padding: 0px 5px;
+      display: inline-block;
+      width: 15px;
+    }
+
+  </style>
 </head>
 <body>
 
-<div class="slidecontainer">
-  <p>Размер точек:<span id="fill"></span></p>
-  <input type="range" min="5" max="20" value="1" id="fillSize">
 
-  <p>Размер линий: <span id="stroke"></span></p>
-  <input type="range" min="5" max="20" value="1" id="strokeSize">
+<div id="container">
 
-  <p>Цвет линий: <span id="stroke-color"></span></p>
-  <input type="color" value="#ff0000" id="strokeColor">
 
-  <p>Цвет точек: <span id="fill-color"></span></p>
-  <input type="color"  value="1" id="fillColor">
+  <img src="img/lab1.png" alt="pic" width="700">
+
+  <div class="slidecontainer">
+    <p>Размер точек: <span id="fill"></span>
+      <input type="range" min="7" max="20" value="1" id="fillSize">
+    </p>
+    <p>Размер линий:<span id="stroke"></span>
+      <input type="range" min="5" max="20" value="1" id="strokeSize">
+    </p>
+    <p>Цвет линий:<span id="stroke-color"></span>
+      <input type="color" value="#068282" id="strokeColor">
+    </p>
+    <p>Цвет точек: <span id="fill-color"></span>
+      <input type="color" value="#ff0000" id="fillColor">
+    </p>
+  </div>
+
+  <div class="canvasimage">
+    <canvas id="imageView" width="700" height="700"></canvas>
+  </div>
 </div>
-
-
-<canvas id="imageView" width="1200" height="1200"></canvas>
-
 
 <script type="text/javascript">
   const canvas = document.getElementById('imageView');
@@ -70,13 +88,15 @@
   context.lineWidth = slider2.value;
   let circleSize = slider1.value;
 
-
+  let strokeColor = colorbox1.value;
+  let fillColor = colorbox2.value;
 
   slider2.addEventListener("input", function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     drawShape()
     context.lineWidth = slider2.value;
     outStroke.innerHTML = this.value;
+
   });
 
   slider1.addEventListener("input", function () {
@@ -86,20 +106,29 @@
     drawShape()
   });
 
-  colorbox1.addEventListener("input", function (){
-
+  colorbox1.addEventListener("input", function () {
+    strokeColor = colorbox1.value;
+    drawShape()
 
   });
 
-
-  colorbox2.addEventListener("input", function (){
-
-
+  colorbox2.addEventListener("input", function () {
+    fillColor = colorbox2.value;
+    drawShape()
   });
 
   function drawShape() {
 
-    context.strokeStyle = '#000000';
+    //x 350
+    //y 46
+
+    context.beginPath();
+    context.strokeStyle = strokeColor;
+    context.lineTo(241, 104);
+    context.bezierCurveTo(241, 104, 340, -36, 450, 104);
+    context.stroke();
+
+    context.strokeStyle = strokeColor;
     context.save();
     context.scale(1, 1);
     context.beginPath();
@@ -108,47 +137,47 @@
     context.closePath();
     context.restore();
 
-    context.strokeStyle = '#000000';
+    context.strokeStyle = strokeColor;
     context.beginPath();
     context.moveTo(351, 407);
     context.lineTo(241, 104);
     context.stroke();
     context.closePath();
 
-    context.strokeStyle = '#000000';
+    context.strokeStyle = strokeColor;
     context.beginPath();
     context.moveTo(241, 104);
     context.lineTo(450, 104);
     context.stroke();
     context.closePath();
 
-    context.strokeStyle = '#000000';
+    context.strokeStyle = strokeColor;
     context.beginPath();
     context.moveTo(450, 104);
     context.lineTo(351, 407);
     context.stroke();
     context.closePath();
-    context.strokeStyle = '#000000';
+    context.strokeStyle = strokeColor;
     context.beginPath();
     context.moveTo(241, 104);
     context.lineTo(186, 292);
     context.stroke();
     context.closePath();
 
-    context.strokeStyle = '#000000';
+    context.strokeStyle = strokeColor;
     context.beginPath();
     context.moveTo(184, 292);
     context.lineTo(511, 292);
     context.stroke();
     context.closePath();
-    context.strokeStyle = '#000000';
+    context.strokeStyle = strokeColor;
     context.beginPath();
     context.moveTo(511, 292);
     context.lineTo(450, 104);
     context.stroke();
     context.closePath();
 
-    context.fillStyle = 'red';
+    context.fillStyle = fillColor;
     context.save();
     context.scale(1, 1);
     context.beginPath();
@@ -156,7 +185,7 @@
     context.closePath();
     context.fill()
 
-    context.fillStyle = 'red';
+    context.fillStyle = fillColor;
     context.save();
     context.scale(1, 1);
     context.beginPath();
@@ -164,7 +193,7 @@
     context.closePath();
     context.fill()
 
-    context.fillStyle = 'red';
+    context.fillStyle = fillColor;
     context.save();
     context.scale(1, 1);
     context.beginPath();
@@ -172,7 +201,7 @@
     context.closePath();
     context.fill()
 
-    context.fillStyle = 'red';
+    context.fillStyle = fillColor;
     context.save();
     context.scale(1, 1);
     context.beginPath();
@@ -180,7 +209,7 @@
     context.closePath();
     context.fill()
 
-    context.fillStyle = 'red';
+    context.fillStyle = fillColor;
     context.save();
     context.scale(1, 1);
     context.beginPath();
