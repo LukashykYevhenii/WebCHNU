@@ -56,28 +56,53 @@
 
     <div class="slidecontainer">
         <h2>Лукашик Євгеній. Група 502</h2>
-        <h2>Варіант №24</h2>
+        <h2>Варіант №7</h2>
     </div>
-    <img src="img/lab1.png" alt="pic" width="700">
+    <img src="img/var7.png" alt="pic" width="797">
 
     <div class="slidecontainer">
         <h3>Готова робота</h3>
     </div>
-    <div class="canvasimage">
+    <div class="svgimage">
+        <!--        <canvas id="imageView" width="700" height="700"></canvas>-->
+        <svg id="imageView" width="795" height="700">
+            <path d="M170,430, C365,355, 570,430, 570,430"
+                  stroke="teal"
+                  stroke-width="6"
+                  fill="none">
+            </path>
 
-        <canvas id="imageView" width="700" height="700"></canvas>
+            <path d="M170,430, C365,505, 570,430, 570,430"
+                  stroke="teal"
+                  stroke-width="6"
+                  fill="none">
+            </path>
+
+            <line class="lines" x1="170" y1="430" x2="570" y2="430" stroke="#068282" stroke-width="6"></line>
+            <line class="lines" x1="170" y1="430" x2="365" y2="305" stroke="#068282" stroke-width="6"></line>
+            <line class="lines" x1="170" y1="430" x2="265" y2="650" stroke="#068282" stroke-width="6"></line>
+            <line class="lines" x1="365" y1="305" x2="570" y2="430" stroke="#068282" stroke-width="6"></line>
+            <line class="lines" x1="265" y1="650" x2="485" y2="650" stroke="#068282" stroke-width="6"></line>
+            <circle id="circle" cx="375" cy="235" r="70" stroke="#068282" stroke-width="6" fill="none"></circle>
+            <circle class="dots" cx="170" cy="430" r="8" fill="#ff0000"></circle>
+            <circle class="dots" cx="365" cy="305" r="8" fill="#ff0000"></circle>
+            <circle class="dots" cx="570" cy="430" r="8" fill="#ff0000"></circle>
+            <circle class="dots" cx="265" cy="650" r="8" fill="#ff0000"></circle>
+            <circle class="dots" cx="485" cy="650" r="8" fill="#ff0000"></circle>
+            <circle class="dots" cx="485" cy="650" r="8" fill="#ff0000"></circle>
+        </svg>
     </div>
 
 
     <div class="slidecontainer">
         <table>
             <tr>
-                <td>Размір вершин: <span id="fill"></span></td>
+                <td>Розмір вершин: <span id="fill"></span></td>
                 <td><input type="range" min="7" max="20" value="1" id="fillSize"></td>
             </tr>
 
             <tr>
-                <td>Размір ребер:<span id="stroke"></span></td>
+                <td>Розмір ребер:<span id="stroke"></span></td>
                 <td><input type="range" min="5" max="20" value="1" id="strokeSize"></td>
             </tr>
 
@@ -96,13 +121,14 @@
 </div>
 
 <script type="text/javascript">
-    const canvas = document.getElementById('imageView');
-    const context = canvas.getContext('2d');
+    const svg = document.getElementById('imageView');
 
     const slider1 = document.getElementById("fillSize");
     const slider2 = document.getElementById('strokeSize');
     const colorbox1 = document.getElementById('strokeColor');
     const colorbox2 = document.getElementById('fillColor');
+    const circle = document.getElementById("circle")
+
 
     const outFill = document.getElementById("fill");
     const outStroke = document.getElementById("stroke");
@@ -110,36 +136,39 @@
     outFill.innerHTML = slider1.value;
     outStroke.innerHTML = slider2.value;
 
-    context.lineWidth = slider2.value;
     let circleSize = slider1.value;
 
     let strokeColor = colorbox1.value;
     let fillColor = colorbox2.value;
 
+
+    let dots = document.getElementsByClassName("dots");
+
+    slider1.addEventListener("input", function () {
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].setAttribute('r', slider1.value);
+        }
+        outFill.innerHTML = this.value;
+    });
+
     slider2.addEventListener("input", function () {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        drawShape()
-        context.lineWidth = slider2.value;
+        circle.setAttribute("stroke-width", slider2.value);
+        svg.querySelectorAll('line').forEach(line => line.setAttribute('stroke-width', slider2.value));
+        svg.querySelectorAll('path').forEach(line => line.setAttribute('stroke-width', slider2.value));
         outStroke.innerHTML = this.value;
 
     });
 
-    slider1.addEventListener("input", function () {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        circleSize = slider1.value;
-        outFill.innerHTML = this.value;
-        drawShape()
-    });
-
     colorbox1.addEventListener("input", function () {
-        strokeColor = colorbox1.value;
-        drawShape()
-
+        circle.setAttribute("stroke", colorbox1.value);
+        svg.querySelectorAll('line').forEach(line => line.setAttribute('stroke', colorbox1.value));
+        svg.querySelectorAll('path').forEach(line => line.setAttribute('stroke', colorbox1.value));
     });
 
     colorbox2.addEventListener("input", function () {
-        fillColor = colorbox2.value;
-        drawShape()
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].setAttribute('fill', colorbox2.value);
+        }
     });
 
     function drawShape() {
