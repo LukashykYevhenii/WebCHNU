@@ -1,226 +1,237 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Your Canvas</title>
-  <style>
-    .slidecontainer {
-      float: left;
-      margin-left: 30px;
-    }
+    <meta charset="UTF-8">
+    <title>Your Canvas</title>
+    <style>
+        .slidecontainer {
+            margin-left: 30px;
+        }
 
-    #imageView, img {
-      border: 2px solid black;
-      border-radius: 20px;
-    }
+        #imageView, img {
+            border: 2px solid black;
+            border-radius: 20px;
+        }
 
-    img {
-      margin-left: 20px;
-    }
+        img {
+            margin-left: 20px;
+        }
 
 
-    .canvasimage {
-      margin: 20px;
-      text-align: center;
-    }
+        .canvasimage, h2 {
+            margin: 20px;
+            text-align: center;
+        }
 
-    #container {
-      font-family: Cambria, serif;
-      font-weight: bold;
-      width: 650px;
-      margin-left: auto;
-      margin-right: auto;
+        #container {
+            font-family: Cambria, serif;
+            font-weight: bold;
+            width: 650px;
+            margin-left: auto;
+            margin-right: auto;
 
-    }
+        }
 
-    #fill, #stroke, #stroke-color, #fill-color {
-      padding: 0px 5px;
-      display: inline-block;
-      width: 15px;
-    }
+        #fill, #stroke, #stroke-color, #fill-color {
+            padding: 0px 5px;
+            display: inline-block;
+            width: 20px;
+        }
 
-  </style>
+        p {
+            text-align: justify;
+        }
+
+        teble, tr, td {
+            padding: 10px;
+        }
+
+    </style>
 </head>
 <body>
 
 
 <div id="container">
 
+    <div class="slidecontainer">
+        <h2>Лукашик Євгеній. Група 502</h2>
+        <h2>Варіант №24</h2>
+    </div>
+    <img src="img/lab1.png" alt="pic" width="700">
 
-  <img src="img/lab1.png" alt="pic" width="700">
+    <div class="slidecontainer">
+        <h3>Готова робота</h3>
+    </div>
+    <div class="canvasimage">
 
-  <div class="slidecontainer">
-    <p>Размер точек: <span id="fill"></span>
-      <input type="range" min="7" max="20" value="1" id="fillSize">
-    </p>
-    <p>Размер линий:<span id="stroke"></span>
-      <input type="range" min="5" max="20" value="1" id="strokeSize">
-    </p>
-    <p>Цвет линий:<span id="stroke-color"></span>
-      <input type="color" value="#068282" id="strokeColor">
-    </p>
-    <p>Цвет точек: <span id="fill-color"></span>
-      <input type="color" value="#ff0000" id="fillColor">
-    </p>
-  </div>
+        <canvas id="imageView" width="700" height="700"></canvas>
+    </div>
 
-  <div class="canvasimage">
-    <canvas id="imageView" width="700" height="700"></canvas>
-  </div>
+
+    <div class="slidecontainer">
+        <table>
+            <tr>
+                <td>Размір вершин: <span id="fill"></span></td>
+                <td><input type="range" min="7" max="20" value="1" id="fillSize"></td>
+            </tr>
+
+            <tr>
+                <td>Размір ребер:<span id="stroke"></span></td>
+                <td><input type="range" min="5" max="20" value="1" id="strokeSize"></td>
+            </tr>
+
+            <tr>
+                <td>Колір ребер:<span id="stroke-color"></span></td>
+                <td><input type="color" value="#068282" id="strokeColor"></td>
+            </tr>
+
+            <tr>
+                <td>Колір вершин:<span id="fill-color"></span></td>
+                <td><input type="color" value="#ff0000" id="fillColor"></td>
+            </tr>
+        </table>
+    </div>
+
 </div>
 
 <script type="text/javascript">
-  const canvas = document.getElementById('imageView');
-  const context = canvas.getContext('2d');
+    const canvas = document.getElementById('imageView');
+    const context = canvas.getContext('2d');
 
-  const slider1 = document.getElementById("fillSize");
-  const slider2 = document.getElementById('strokeSize');
-  const colorbox1 = document.getElementById('strokeColor');
-  const colorbox2 = document.getElementById('fillColor');
+    const slider1 = document.getElementById("fillSize");
+    const slider2 = document.getElementById('strokeSize');
+    const colorbox1 = document.getElementById('strokeColor');
+    const colorbox2 = document.getElementById('fillColor');
 
-  const outFill = document.getElementById("fill");
-  const outStroke = document.getElementById("stroke");
+    const outFill = document.getElementById("fill");
+    const outStroke = document.getElementById("stroke");
 
-  outFill.innerHTML = slider1.value;
-  outStroke.innerHTML = slider2.value;
+    outFill.innerHTML = slider1.value;
+    outStroke.innerHTML = slider2.value;
 
-  context.lineWidth = slider2.value;
-  let circleSize = slider1.value;
-
-  let strokeColor = colorbox1.value;
-  let fillColor = colorbox2.value;
-
-  slider2.addEventListener("input", function () {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    drawShape()
     context.lineWidth = slider2.value;
-    outStroke.innerHTML = this.value;
+    let circleSize = slider1.value;
 
-  });
+    let strokeColor = colorbox1.value;
+    let fillColor = colorbox2.value;
 
-  slider1.addEventListener("input", function () {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    circleSize = slider1.value;
-    outFill.innerHTML = this.value;
+    slider2.addEventListener("input", function () {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        drawShape()
+        context.lineWidth = slider2.value;
+        outStroke.innerHTML = this.value;
+
+    });
+
+    slider1.addEventListener("input", function () {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        circleSize = slider1.value;
+        outFill.innerHTML = this.value;
+        drawShape()
+    });
+
+    colorbox1.addEventListener("input", function () {
+        strokeColor = colorbox1.value;
+        drawShape()
+
+    });
+
+    colorbox2.addEventListener("input", function () {
+        fillColor = colorbox2.value;
+        drawShape()
+    });
+
+    function drawShape() {
+
+
+        context.beginPath();
+        context.strokeStyle = strokeColor;
+        context.lineTo(241, 104);
+        context.bezierCurveTo(241, 104, 340, -30, 450, 104);
+        context.stroke();
+
+        context.strokeStyle = strokeColor;
+        context.beginPath();
+        context.arc(350, 470, 61, 0, 2 * Math.PI, false);
+        context.stroke();
+        context.closePath();
+        context.restore();
+
+        context.strokeStyle = strokeColor;
+        context.beginPath();
+        context.moveTo(351, 407);
+        context.lineTo(241, 104);
+        context.stroke();
+        context.closePath();
+
+        context.strokeStyle = strokeColor;
+        context.beginPath();
+        context.moveTo(241, 104);
+        context.lineTo(450, 104);
+        context.stroke();
+        context.closePath();
+
+        context.strokeStyle = strokeColor;
+        context.beginPath();
+        context.moveTo(450, 104);
+        context.lineTo(351, 407);
+        context.stroke();
+        context.closePath();
+        context.strokeStyle = strokeColor;
+        context.beginPath();
+        context.moveTo(241, 104);
+        context.lineTo(186, 292);
+        context.stroke();
+        context.closePath();
+
+        context.strokeStyle = strokeColor;
+        context.beginPath();
+        context.moveTo(184, 292);
+        context.lineTo(511, 292);
+        context.stroke();
+        context.closePath();
+        context.strokeStyle = strokeColor;
+        context.beginPath();
+        context.moveTo(511, 292);
+        context.lineTo(450, 104);
+        context.stroke();
+        context.closePath();
+
+        context.fillStyle = fillColor;
+        context.beginPath();
+        context.arc(351, 407, circleSize, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fill()
+
+        context.fillStyle = fillColor;
+        context.beginPath();
+        context.arc(241, 104, circleSize, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fill()
+
+        context.fillStyle = fillColor;
+        context.beginPath();
+        context.arc(184, 292, circleSize, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fill()
+
+        context.fillStyle = fillColor;
+        context.beginPath();
+        context.arc(511, 292, circleSize, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fill()
+
+        context.fillStyle = fillColor;
+        context.beginPath();
+        context.arc(450, 104, circleSize, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fill()
+        context.closePath();
+        context.restore();
+    }
+
     drawShape()
-  });
-
-  colorbox1.addEventListener("input", function () {
-    strokeColor = colorbox1.value;
-    drawShape()
-
-  });
-
-  colorbox2.addEventListener("input", function () {
-    fillColor = colorbox2.value;
-    drawShape()
-  });
-
-  function drawShape() {
-
-    //x 350
-    //y 46
-
-    context.beginPath();
-    context.strokeStyle = strokeColor;
-    context.lineTo(241, 104);
-    context.bezierCurveTo(241, 104, 340, -36, 450, 104);
-    context.stroke();
-
-    context.strokeStyle = strokeColor;
-    context.save();
-    context.scale(1, 1);
-    context.beginPath();
-    context.arc(350, 470, 61, 0, 2 * Math.PI, false);
-    context.stroke();
-    context.closePath();
-    context.restore();
-
-    context.strokeStyle = strokeColor;
-    context.beginPath();
-    context.moveTo(351, 407);
-    context.lineTo(241, 104);
-    context.stroke();
-    context.closePath();
-
-    context.strokeStyle = strokeColor;
-    context.beginPath();
-    context.moveTo(241, 104);
-    context.lineTo(450, 104);
-    context.stroke();
-    context.closePath();
-
-    context.strokeStyle = strokeColor;
-    context.beginPath();
-    context.moveTo(450, 104);
-    context.lineTo(351, 407);
-    context.stroke();
-    context.closePath();
-    context.strokeStyle = strokeColor;
-    context.beginPath();
-    context.moveTo(241, 104);
-    context.lineTo(186, 292);
-    context.stroke();
-    context.closePath();
-
-    context.strokeStyle = strokeColor;
-    context.beginPath();
-    context.moveTo(184, 292);
-    context.lineTo(511, 292);
-    context.stroke();
-    context.closePath();
-    context.strokeStyle = strokeColor;
-    context.beginPath();
-    context.moveTo(511, 292);
-    context.lineTo(450, 104);
-    context.stroke();
-    context.closePath();
-
-    context.fillStyle = fillColor;
-    context.save();
-    context.scale(1, 1);
-    context.beginPath();
-    context.arc(351, 407, circleSize, 0, 2 * Math.PI, false);
-    context.closePath();
-    context.fill()
-
-    context.fillStyle = fillColor;
-    context.save();
-    context.scale(1, 1);
-    context.beginPath();
-    context.arc(241, 104, circleSize, 0, 2 * Math.PI, false);
-    context.closePath();
-    context.fill()
-
-    context.fillStyle = fillColor;
-    context.save();
-    context.scale(1, 1);
-    context.beginPath();
-    context.arc(184, 292, circleSize, 0, 2 * Math.PI, false);
-    context.closePath();
-    context.fill()
-
-    context.fillStyle = fillColor;
-    context.save();
-    context.scale(1, 1);
-    context.beginPath();
-    context.arc(511, 292, circleSize, 0, 2 * Math.PI, false);
-    context.closePath();
-    context.fill()
-
-    context.fillStyle = fillColor;
-    context.save();
-    context.scale(1, 1);
-    context.beginPath();
-    context.arc(450, 104, circleSize, 0, 2 * Math.PI, false);
-    context.closePath();
-    context.fill()
-    context.closePath();
-    context.restore();
-  }
-
-  drawShape()
 </script>
 </body>
 </html>
