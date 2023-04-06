@@ -64,7 +64,6 @@
         <h3>Готова робота</h3>
     </div>
     <div class="svgimage">
-        <!--        <canvas id="imageView" width="700" height="700"></canvas>-->
         <svg id="imageView" width="795" height="700">
             <path d="M170,430, C365,355, 570,430, 570,430"
                   stroke="teal"
@@ -136,11 +135,6 @@
     outFill.innerHTML = slider1.value;
     outStroke.innerHTML = slider2.value;
 
-    let circleSize = slider1.value;
-
-    let strokeColor = colorbox1.value;
-    let fillColor = colorbox2.value;
-
 
     let dots = document.getElementsByClassName("dots");
 
@@ -170,97 +164,6 @@
             dots[i].setAttribute('fill', colorbox2.value);
         }
     });
-
-    function drawShape() {
-
-
-        context.beginPath();
-        context.strokeStyle = strokeColor;
-        context.lineTo(241, 104);
-        context.bezierCurveTo(241, 104, 340, -30, 450, 104);
-        context.stroke();
-
-        context.strokeStyle = strokeColor;
-        context.beginPath();
-        context.arc(350, 470, 61, 0, 2 * Math.PI, false);
-        context.stroke();
-        context.closePath();
-        context.restore();
-
-        context.strokeStyle = strokeColor;
-        context.beginPath();
-        context.moveTo(351, 407);
-        context.lineTo(241, 104);
-        context.stroke();
-        context.closePath();
-
-        context.strokeStyle = strokeColor;
-        context.beginPath();
-        context.moveTo(241, 104);
-        context.lineTo(450, 104);
-        context.stroke();
-        context.closePath();
-
-        context.strokeStyle = strokeColor;
-        context.beginPath();
-        context.moveTo(450, 104);
-        context.lineTo(351, 407);
-        context.stroke();
-        context.closePath();
-        context.strokeStyle = strokeColor;
-        context.beginPath();
-        context.moveTo(241, 104);
-        context.lineTo(186, 292);
-        context.stroke();
-        context.closePath();
-
-        context.strokeStyle = strokeColor;
-        context.beginPath();
-        context.moveTo(184, 292);
-        context.lineTo(511, 292);
-        context.stroke();
-        context.closePath();
-        context.strokeStyle = strokeColor;
-        context.beginPath();
-        context.moveTo(511, 292);
-        context.lineTo(450, 104);
-        context.stroke();
-        context.closePath();
-
-        context.fillStyle = fillColor;
-        context.beginPath();
-        context.arc(351, 407, circleSize, 0, 2 * Math.PI, false);
-        context.closePath();
-        context.fill()
-
-        context.fillStyle = fillColor;
-        context.beginPath();
-        context.arc(241, 104, circleSize, 0, 2 * Math.PI, false);
-        context.closePath();
-        context.fill()
-
-        context.fillStyle = fillColor;
-        context.beginPath();
-        context.arc(184, 292, circleSize, 0, 2 * Math.PI, false);
-        context.closePath();
-        context.fill()
-
-        context.fillStyle = fillColor;
-        context.beginPath();
-        context.arc(511, 292, circleSize, 0, 2 * Math.PI, false);
-        context.closePath();
-        context.fill()
-
-        context.fillStyle = fillColor;
-        context.beginPath();
-        context.arc(450, 104, circleSize, 0, 2 * Math.PI, false);
-        context.closePath();
-        context.fill()
-        context.closePath();
-        context.restore();
-    }
-
-    drawShape()
 </script>
 </body>
 </html>
